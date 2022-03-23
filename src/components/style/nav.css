@@ -1,0 +1,11 @@
+.navbar>ul{
+    display: flex;
+    justify-content: space-around;
+    background-color: blue;
+    color: white;
+}
+li{
+    color: white;
+    text-decoration: none;
+    font-size: large;
+}
