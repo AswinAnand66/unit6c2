@@ -5,3 +5,9 @@ export const GET_PRODUCT_DATA="GET_PRODUCT_DATA";
 
 export const SORT_PRODUCTS_BY_ASC="SORT_PRODUCTS_BY_ASC";
 export const SORT_PRODUCTS_BY_DSC="SORT_PRODUCTS_BY_DSC"
+
+
+export const SUCCESS="SUCCESS";
+export const FAILURE="FAILURE";
+
+export const SORT="SORT";

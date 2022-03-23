@@ -4,6 +4,7 @@ import { Home } from "../components/Home"
 import { About } from "../components/About"
 import { Products } from "../components/ProductsDashboard"
 import { SingleProductList } from "../components/SingleProduct"
+import { Clicked } from "../components/Clicked"
 
 export const MainRoutes = ()=>{
     return(
@@ -13,7 +14,7 @@ export const MainRoutes = ()=>{
            <Route path="/" element={<Home/>}/>
            <Route path="/about" element={<About/>} />
            <Route path="/products" element={<Products/>}/>
-           <Route path="/products/:id" element={<SingleProductList/>}/>
+           <Route path="/products/:id" element={<Clicked/>}/>
         </Routes>
         </>
     )

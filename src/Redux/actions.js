@@ -1,13 +1,12 @@
 import axios from "axios";
-import { GET_PRODUCT_DATA, GET_PRODUCT_REQ, SORT_PRODUCTS, SORT_PRODUCTS_BY_ASC, SORT_PRODUCTS_BY_DSC } from "./actionTypes";
+import { FAILURE, GET_PRODUCT_DATA, GET_PRODUCT_REQ, SORT, SORT_PRODUCTS, SORT_PRODUCTS_BY_ASC, SORT_PRODUCTS_BY_DSC, SUCCESS } from "./actionTypes";
 
 // action for get products request
-export const getProductsReq = (payload) =>{
-    const data=  payload;
-   // console.log("dara",data)
+export const getProductsReq = () =>{
+    
     return {
         type:GET_PRODUCT_REQ,
-        payload:data,
+       
     }
 }
 
@@ -20,37 +19,35 @@ export const getProductsReq = (payload) =>{
 
 // action for get products success
 
-const getProductsSuccess = () => ({});
+export const getProductsSuccess = (payload) => ({
+    type:SUCCESS,
+    payload:payload
+});
 
 // action for get products failure
 
-const getProductsFailure = () => ({});
-
-// thunk call to fetch products  list
-export const getproductsData = () =>async(dispatch)=> {
-    const fetchData=async()=>{
-        const res=await fetch("https://movie-fake-server.herokuapp.com/products")
-        const data=await res.json();
-        //console.log(data)
-        return data;
-    }
-    try{
-        const datas=await fetchData();
-        dispatch(getProductsReq(datas))
-    }catch(err){
-        console.log(err)
-    }
-    
-};
-
-// action object for sort  feature
-
-export const sortProductsByAsc = (payload) => ({
-    type:SORT_PRODUCTS_BY_ASC,
-    payload:payload,
+export const getProductsFailure = () => ({
+    type:FAILURE
 });
 
-export const sortProductsByDsc=(payload)=>({
-    type:SORT_PRODUCTS_BY_DSC,
-    payload:payload
-})
+// thunk call to fetch products  list
+export const getproductsData = () => {
+    return (dispatch) => {
+      dispatch(getProductsReq());
+      axios
+        .get("https://movie-fake-server.herokuapp.com/products")
+        .then((res) => {
+          dispatch(getProductsSuccess(res.data));
+        })
+        .catch((err) => {
+          dispatch(getProductsFailure());
+          console.log(err);
+        });
+    };
+  };
+
+// action object for sort  feature
+export const sort=(payload)=>({
+   type:SORT,
+   payload:payload,
+});
